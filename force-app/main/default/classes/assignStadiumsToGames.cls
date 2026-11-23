@@ -14,6 +14,7 @@ global class assignStadiumsToGames {
       for (List<Game__c> gameList : inputGames) {
           for (Game__c game : gameList) {
               game.Stadium__c = idMap.get(game.Stadium__c);
+              game.Match__c = 'a0B4x00000I9hMQEAZ';
           }
       } 
       
