@@ -1,18 +1,45 @@
-# Salesforce DX Project: Next Steps
+# Baseball Data Integration for Salesforce
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+This Salesforce DX project demonstrates an API-driven data integration pipeline: Salesforce Flow and Apex code retrieve SportsData.io game data by date, map external identifiers to Salesforce records, and model game and inning data in custom objects for score reporting.
 
-## How Do You Plan to Deploy Your Changes?
+## What it does
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- Calls an external baseball data service through Salesforce External Services.
+- Uses a Salesforce Flow to retrieve games by date and create Game and Inning records.
+- Uses invocable Apex actions to map external team, stadium, and game identifiers to Salesforce records.
+- Displays teams, runs, hits, errors, and inning scores with a Lightning Web Component on the Game record page.
+- Models games, teams, stadiums, and innings as custom Salesforce objects.
 
-## Configure Your Salesforce DX Project
+## Technologies
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+- **Salesforce Platform:** Salesforce Flow, External Services, custom objects, fields, layouts, and Lightning record pages
+- **Apex:** Invocable actions for resolving external IDs and preparing related records
+- **Lightning Web Components:** JavaScript, HTML, and CSS for the game line score
+- **Salesforce DX:** Salesforce CLI and source-formatted metadata
+- **JavaScript tooling:** ESLint, Prettier, and Jest-based LWC unit testing
 
-## Read All About It
+## Setup and deployment
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+### Prerequisites
+
+- A Salesforce org with permission to deploy metadata and use the required Salesforce features.
+- Salesforce CLI (`sf`).
+- Node.js and npm for the JavaScript tooling.
+- Access to the baseball data service used by the External Service registration.
+
+### Connect to an org
+
+```bash
+sf org login web --alias baseball-dev
+```
+
+Configure the org's External Services and the `Sports_Data` Named Credential for the target environment. Keep environment-specific authentication details out of source control.
+
+### Install development dependencies and deploy
+
+```bash
+npm install
+sf project deploy start --target-org baseball-dev --source-dir force-app
+```
+
+After deployment, activate the relevant Flow and configure the app or record page for the org as needed.
