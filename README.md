@@ -50,4 +50,10 @@ npm install
 sf project deploy start --target-org baseball-dev --source-dir force-app
 ```
 
-After deployment, activate the relevant Flow and configure the app or record page for the org as needed.
+After deployment, activate the `Get Games By Date` Flow and configure the app or record page for the org as needed.
+
+### Import Team and Stadium records
+
+Import `stadiums-for-import-wizard.csv` and `teams-for-import-wizard.csv` with the Salesforce Data Import Wizard.
+
+Then run `Get Games By Date` flow to import sports data from the external source.
